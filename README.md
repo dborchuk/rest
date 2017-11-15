@@ -9,3 +9,6 @@ yarn dev
 ```
 yarn start
 ```
+
+## TODO
+* Add `.babelrc` (https://github.com/babel/example-node-server#saving-babel-options-to-babelrc)
