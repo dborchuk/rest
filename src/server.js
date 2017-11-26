@@ -17,7 +17,21 @@ export default function() {
 
   routing(app);
 
-  app.listen(PORT, function () {
+  app.listen(PORT, () => {
     log.info(`Express server listening on port ${PORT}`);
+  });
+
+  app.use((req, res, next) => {
+    res.status(404);
+    log.debug('Not found URL: %s', req.url);
+    res.send({ error: 'Not found' });
+    return;
+  });
+
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    log.error('Internal error(%d): %s', res.statusCode, err.message);
+    res.send({ error: err.message });
+    return;
   });
 }
