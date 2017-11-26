@@ -6,6 +6,7 @@ import path from 'path';
 import { PORT } from './config';
 import logger from './logger';
 import routing from './routing';
+import migrations from './migrations';
 
 export default function() {
   const app = express();
@@ -16,6 +17,7 @@ export default function() {
   app.use(express.static(path.join(__dirname, "public")));
 
   routing(app);
+  migrations();
 
   app.listen(PORT, () => {
     log.info(`Express server listening on port ${PORT}`);
