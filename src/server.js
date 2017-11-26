@@ -4,10 +4,12 @@ import bodyParser from 'body-parser';
 import path from 'path';
 
 import { PORT } from './config';
+import logger from './logger';
 import routing from './routing';
 
 export default function() {
   const app = express();
+  const log = logger(module);
 
   app.use(morgan('dev'));
   app.use(bodyParser.json())
@@ -16,6 +18,6 @@ export default function() {
   routing(app);
 
   app.listen(PORT, function () {
-    console.log(`Express server listening on port ${PORT}`);
+    log.info(`Express server listening on port ${PORT}`);
   });
 }
